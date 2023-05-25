@@ -6,6 +6,6 @@ const stockController = require("../controllers/stock.controller");
 router.use(express.json());
 
 router.get("/stock/:productId", stockController.getStock);
-router.put("/stock/:productId/:quantity", stockController.updateStock);
+router.put("/stock/:productId", stockController.updateStock);
 
 module.exports = router;

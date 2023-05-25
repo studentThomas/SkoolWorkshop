@@ -45,7 +45,7 @@ const stockController = {
 
   updateStock: (req, res, next) => {
     const productId = req.params.productId;
-    let quantity = Number(req.params.quantity); // Parse quantity to a number
+    let quantity = Number(req.body.quantity);
 
     let sqlCheck = `SELECT * FROM stock WHERE productId = ?`;
     let sqlStatement = `UPDATE stock SET quantity = ? WHERE productId = ?`;

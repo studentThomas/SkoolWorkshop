@@ -3,7 +3,7 @@ const pool = require("../util/mysql-db");
 
 const productController = {
   getProducts: (req, res, next) => {
-    let sqlStatement = "SELECT * FROM `product`";
+    let sqlStatement = "SELECT * FROM product";
 
     pool.getConnection(function (err, conn) {
       if (err) {
