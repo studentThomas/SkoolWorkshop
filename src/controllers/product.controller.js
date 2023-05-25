@@ -35,12 +35,11 @@ const productController = {
   },
 
   addProduct: (req, res, next) => {
-    const product = req.body;
-    const name = product.name;
-    let sqlCheck = `SELECT * FROM product WHERE name = ?`;
-    let sqlStatement = `INSERT INTO product SET ?`;
+    const { workshopId, quantity, ...productData } = req.body;
 
-    logger.info(product);
+    let sqlCheck = `SELECT * FROM product WHERE name = ?`;
+    let sqlProduct = `INSERT INTO product SET ?`;
+    let sqlStock = `INSERT INTO stock (productId, workshopId, quantity) VALUES (?, ?, ?)`;
 
     pool.getConnection(function (err, conn) {
       if (err) {
@@ -50,7 +49,7 @@ const productController = {
         });
       }
 
-      conn.query(sqlCheck, [name], (error, results) => {
+      conn.query(sqlCheck, [productData.name], (error, results) => {
         if (error) {
           return next({
             status: 409,
@@ -64,22 +63,31 @@ const productController = {
             message: `Product already exists`,
           });
         } else {
-          conn.query(sqlStatement, product, (error, results) => {
+          conn.query(sqlProduct, productData, (error, resultProduct) => {
             if (error) {
               return next({
                 status: 409,
                 message: error,
               });
             }
-            if (results) {
-              const insertedProduct = { id: results.insertId, ...product };
 
-              res.send({
+            const productId = resultProduct.insertId;
+            const stockData = [productId, workshopId, quantity];
+
+            conn.query(sqlStock, stockData, (error, resultStock) => {
+              if (error) {
+                return next({
+                  status: 409,
+                  message: error,
+                });
+              }
+
+              res.status(201).json({
                 status: 201,
-                message: `Product created`,
-                data: insertedProduct,
+                message: "Product created",
+                data: productData,
               });
-            }
+            });
           });
         }
         pool.releaseConnection(conn);
