@@ -138,6 +138,61 @@ const productController = {
       });
     });
   },
+
+  updateProduct: (req, res, next) => {
+    const productId = req.params.productId;
+    const updatedProduct = req.body;
+    const sqlStatement = `UPDATE product SET ? WHERE id = ?`;
+    const sqlCheck = `SELECT * FROM product WHERE id = ?`;
+
+    pool.getConnection(function (err, conn) {
+      if (err) {
+        return next({
+          status: 409,
+          message: err.message,
+        });
+      }
+
+      conn.query(sqlCheck, [productId], (error, results) => {
+        if (error) {
+          return next({
+            status: 409,
+            message: error,
+          });
+        }
+
+        if (results.length == 0) {
+          return next({
+            status: 403,
+            message: `Product not found`,
+          });
+        }
+
+        conn.query(
+          sqlStatement,
+          [updatedProduct, productId],
+          (error, results) => {
+            if (error) {
+              return next({
+                status: 409,
+                message: error,
+              });
+            }
+
+            if (results) {
+              res.send({
+                status: 200,
+                message: `Product updated`,
+                data: updatedProduct,
+              });
+            }
+
+            pool.releaseConnection(conn);
+          }
+        );
+      });
+    });
+  },
 };
 
 module.exports = productController;
