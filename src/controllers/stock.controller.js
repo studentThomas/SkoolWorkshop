@@ -1,5 +1,4 @@
 const logger = require("../util/logger").logger;
-const { log } = require("console");
 const pool = require("../util/mysql-db");
 
 const stockController = {
