@@ -97,8 +97,10 @@ const productController = {
 
   deleteProduct: (req, res, next) => {
     const productId = req.params.productId;
-    const sqlStatement = `DELETE FROM product WHERE id = ?`;
     const sqlCheck = `SELECT * FROM product WHERE id = ?`;
+    const sqlStatement = `DELETE product, stock FROM product 
+    LEFT JOIN stock ON product.id = stock.productId
+    WHERE product.id = ?`;
 
     pool.getConnection(function (err, conn) {
       if (err) {
@@ -115,8 +117,6 @@ const productController = {
             message: error,
           });
         }
-
-        logger.info(productId);
 
         if (results.length == 0) {
           return next({
