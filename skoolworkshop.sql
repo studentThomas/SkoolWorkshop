@@ -63,4 +63,4 @@ INSERT INTO `user` VALUES
 INSERT INTO `stock` VALUES 
   (1, 1, 100),
   (2, 2, 200),
-  (1, 2, 55);
+  (1, 2, 100);

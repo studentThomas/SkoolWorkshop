@@ -31,19 +31,12 @@ const stockController = {
           });
         }
 
-        let quantity = 0;
-        logger.info(results);
-
-        for (let i = 0; i < results.length; i++) {
-          quantity += results[i].quantity;
-        }
-
         res.status(200).json({
           status: 200,
           message: "Product is found",
           data: {
             productId: results[0].productId,
-            quantity: quantity,
+            quantity: results[0].quantity,
           },
         });
       });
@@ -52,8 +45,7 @@ const stockController = {
 
   updateStock: (req, res, next) => {
     const productId = req.params.productId;
-
-    let quantity = req.body.quantity;
+    let quantity = Number(req.params.quantity); // Parse quantity to a number
 
     let sqlCheck = `SELECT * FROM stock WHERE productId = ?`;
     let sqlStatement = `UPDATE stock SET quantity = ? WHERE productId = ?`;
@@ -84,6 +76,13 @@ const stockController = {
           return next({
             status: 409,
             message: "Product is not found",
+          });
+        }
+
+        if (quantity < 0) {
+          return next({
+            status: 409,
+            message: "Quantity to low",
           });
         }
 
