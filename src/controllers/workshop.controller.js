@@ -48,6 +48,38 @@ const workshopController = {
       });
     });
   },
+
+  getWorkshops: (req, res, next) => {
+    const workshopId = req.params.workshopId;
+
+    const sqlStatement = `SELECT * FROM workshop`;
+
+    pool.getConnection((err, conn) => {
+      if (err) {
+        return next({
+          status: 409,
+          message: err.message,
+        });
+      }
+
+      conn.query(sqlStatement, [workshopId], (error, results) => {
+        if (error) {
+          return next({
+            status: 409,
+            message: error,
+          });
+        }
+
+        if (results) {
+          res.status(200).json({
+            status: 200,
+            message: "Workshops are retrieved",
+            data: results,
+          });
+        }
+      });
+    });
+  },
 };
 
 module.exports = workshopController;
