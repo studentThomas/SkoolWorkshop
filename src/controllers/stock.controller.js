@@ -6,7 +6,7 @@ const stockController = {
   getStock: (req, res, next) => {
     const productId = req.params.productId;
 
-    let sqlCheck = `SELECT * FROM stock WHERE productId = ?`;
+    const sqlCheck = `SELECT * FROM stock WHERE productId = ?`;
 
     pool.getConnection((err, conn) => {
       if (err) {
@@ -47,8 +47,8 @@ const stockController = {
     const productId = req.params.productId;
     let quantity = Number(req.body.quantity);
 
-    let sqlCheck = `SELECT * FROM stock WHERE productId = ?`;
-    let sqlStatement = `UPDATE stock SET quantity = ? WHERE productId = ?`;
+    const sqlCheck = `SELECT * FROM stock WHERE productId = ?`;
+    const sqlStatement = `UPDATE stock SET quantity = ? WHERE productId = ?`;
 
     pool.getConnection((err, conn) => {
       if (err) {
