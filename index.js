@@ -1,5 +1,6 @@
 const express = require("express");
 const productRouter = require("./src/routes/product.routes");
+const stockRouter = require("./src/routes/stock.routes");
 const logger = require("./src/util/logger").logger;
 const app = express();
 const port = process.env.PORT || 3000;
@@ -14,6 +15,7 @@ app.use("*", (req, res, next) => {
 });
 
 app.use("/api", productRouter);
+app.use("/api", stockRouter);
 
 app.use("*", (req, res) => {
   logger.error("Endpoint not found");
