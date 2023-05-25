@@ -1,7 +1,55 @@
 const logger = require("../util/logger").logger;
+const { log } = require("console");
 const pool = require("../util/mysql-db");
 
 const stockController = {
+  getStock: (req, res, next) => {
+    const productId = req.params.productId;
+
+    let sqlCheck = `SELECT * FROM stock WHERE productId = ?`;
+
+    pool.getConnection((err, conn) => {
+      if (err) {
+        return next({
+          status: 409,
+          message: err.message,
+        });
+      }
+
+      conn.query(sqlCheck, [productId], (error, results) => {
+        if (error) {
+          return next({
+            status: 409,
+            message: error,
+          });
+        }
+
+        if (results.length == 0) {
+          return next({
+            status: 404,
+            message: "Product is not found",
+          });
+        }
+
+        let quantity = 0;
+        logger.info(results);
+
+        for (let i = 0; i < results.length; i++) {
+          quantity += results[i].quantity;
+        }
+
+        res.status(200).json({
+          status: 200,
+          message: "Product is found",
+          data: {
+            productId: results[0].productId,
+            quantity: quantity,
+          },
+        });
+      });
+    });
+  },
+
   updateStock: (req, res, next) => {
     const productId = req.params.productId;
 
@@ -50,7 +98,7 @@ const stockController = {
           if (results) {
             res.status(200).json({
               status: 200,
-              message: "Stock is updated",
+              message: "Quantity is updated",
               data: {
                 quantity: quantity,
               },
