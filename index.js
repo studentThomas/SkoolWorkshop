@@ -26,7 +26,7 @@ app.use("*", (req, res) => {
 
 app.use((err, req, res, next) => {
   logger.warn(err);
-  res.send({
+  res.status(err.status).json({
     status: err.status,
     message: err.message,
     data: {},
