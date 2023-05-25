@@ -2,6 +2,7 @@ const express = require("express");
 const productRouter = require("./src/routes/product.routes");
 const logger = require("./src/util/logger").logger;
 const app = express();
+const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
