@@ -7,7 +7,7 @@ const productController = {
 
     pool.getConnection(function (err, conn) {
       if (err) {
-        next({
+        return next({
           status: 409,
           message: err.message,
         });
@@ -15,7 +15,7 @@ const productController = {
 
       conn.query(sqlStatement, (err, results) => {
         if (err) {
-          next({
+          return next({
             status: 409,
             message: err.message,
           });
@@ -44,7 +44,7 @@ const productController = {
 
     pool.getConnection(function (err, conn) {
       if (err) {
-        next({
+        return next({
           status: 409,
           message: err.message,
         });
@@ -52,21 +52,21 @@ const productController = {
 
       conn.query(sqlCheck, [name], (error, results) => {
         if (error) {
-          next({
+          return next({
             status: 409,
             message: error,
           });
         }
 
         if (results.length > 0) {
-          next({
+          return next({
             status: 403,
             message: `Product already exists`,
           });
         } else {
           conn.query(sqlStatement, product, (error, results) => {
             if (error) {
-              next({
+              return next({
                 status: 409,
                 message: error,
               });
@@ -83,6 +83,58 @@ const productController = {
           });
         }
         pool.releaseConnection(conn);
+      });
+    });
+  },
+
+  deleteProduct: (req, res, next) => {
+    const productId = req.params.productId;
+    const sqlStatement = `DELETE FROM product WHERE id = ?`;
+    const sqlCheck = `SELECT * FROM product WHERE id = ?`;
+
+    pool.getConnection(function (err, conn) {
+      if (err) {
+        return next({
+          status: 409,
+          message: err.message,
+        });
+      }
+
+      conn.query(sqlCheck, [productId], (error, results) => {
+        if (error) {
+          return next({
+            status: 409,
+            message: error,
+          });
+        }
+
+        logger.info(productId);
+
+        if (results.length == 0) {
+          return next({
+            status: 403,
+            message: `Product not found`,
+          });
+        }
+
+        conn.query(sqlStatement, [productId], (error, results) => {
+          if (error) {
+            return next({
+              status: 409,
+              message: error,
+            });
+          }
+
+          if (results) {
+            res.send({
+              status: 200,
+              message: `Product deleted`,
+              data: {},
+            });
+          }
+
+          pool.releaseConnection(conn);
+        });
       });
     });
   },
