@@ -6,5 +6,6 @@ router.use(express.json());
 
 router.post("/workshop", workshopController.addWorkshop);
 router.get("/workshop", workshopController.getWorkshops);
+router.delete("/workshop/:workshopId", workshopController.deleteWorkshop);
 
 module.exports = router;

@@ -80,6 +80,56 @@ const workshopController = {
       });
     });
   },
+
+  deleteWorkshop: (req, res, next) => {
+    const workshopId = req.params.workshopId;
+    const sqlCheck = `SELECT * FROM workshop WHERE id = ?`;
+    const sqlStatement = `DELETE FROM workshop WHERE id = ?`;
+
+    pool.getConnection(function (err, conn) {
+      if (err) {
+        return next({
+          status: 409,
+          message: err.message,
+        });
+      }
+
+      conn.query(sqlCheck, [workshopId], (error, results) => {
+        if (error) {
+          return next({
+            status: 409,
+            message: error,
+          });
+        }
+
+        if (results.length == 0) {
+          return next({
+            status: 403,
+            message: `Workshop not found`,
+          });
+        }
+
+        conn.query(sqlStatement, [workshopId], (error, results) => {
+          if (error) {
+            return next({
+              status: 409,
+              message: error,
+            });
+          }
+
+          if (results) {
+            res.send({
+              status: 200,
+              message: `Workshop deleted`,
+              data: {},
+            });
+          }
+
+          pool.releaseConnection(conn);
+        });
+      });
+    });
+  },
 };
 
 module.exports = workshopController;
