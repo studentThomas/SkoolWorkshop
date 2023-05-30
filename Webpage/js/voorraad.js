@@ -7,7 +7,7 @@ function searchInventoryItems() {
     const barcode = menuItem.querySelector('.barcode').textContent.toLowerCase();
 
     if (title.includes(searchInput) || barcode.includes(searchInput)) {
-      menuItem.style.display = 'block';
+      menuItem.style.display = 'flex';
     } else {
       menuItem.style.display = 'none';
     }
