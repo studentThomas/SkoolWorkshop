@@ -1,112 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/css/bootstrap.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Sora"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Page</title>
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/css/bootstrap.min.css">
-  <link href='https://fonts.googleapis.com/css?family=Sora' rel='stylesheet'>
-  <link rel="stylesheet" href="/css/styles.css">
-</head>
-
-<body>
-  <div class="container d-flex justify-content-center align-items-center vh-100">
-    <div class="row">
-      <div class="col-12 text-center">
-        <div class="logo">
-          <img src="/img/Skool-Workshop_Logo.png" alt="Logo">
+  <body>
+    <div
+      class="container d-flex justify-content-center align-items-center vh-100"
+    >
+      <div class="row">
+        <div class="col-12 text-center">
+          <div class="logo">
+            <img src="/img/Skool-Workshop_Logo.png" alt="Logo" />
+          </div>
         </div>
-      </div>
-      <div class="col-12">
-        <div class="login-card bg-white rounded shadow p-4">
-          <h2 class="mb-4">Login</h2>
-          <form action="#" method="POST" id="loginForm">
-            <div class="mb-3">
-              <label for="email" class="form-label font-weight-bold">Email:</label>
-              <input type="email" class="form-control" id="email" name="email" required>
-            </div>
-            <div class="mb-3">
-              <label for="password" class="form-label font-weight-bold">Password:</label>
-              <input type="password" class="form-control" id="password" name="password" required>
-            </div>
-            <div class="mb-3 form-check">
-              <input type="checkbox" class="form-check-input" id="rememberMe">
-              <label class="form-check-label" for="rememberMe">Remember me</label>
-            </div>
-            <div class="text-center">
-              <button type="submit" class="btn btn-primary w-100">Login</button>
-            </div>
-          </form>
-          <p class="text-center mt-3 text-secondary">Not registered yet? <u><a href="#" class="register-link">Register</a></u></p>
+        <div class="col-12">
+          <div class="login-card bg-white rounded shadow p-4">
+            <h2 class="mb-4">Login</h2>
+            <form action="#" method="POST" id="loginForm">
+              <div class="mb-3">
+                <label for="email" class="form-label font-weight-bold"
+                  >Email:</label
+                >
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label font-weight-bold"
+                  >Password:</label
+                >
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  name="password"
+                  required
+                />
+              </div>
+              <div class="mb-3 form-check">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="rememberMe"
+                />
+                <label class="form-check-label" for="rememberMe"
+                  >Remember me</label
+                >
+              </div>
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary w-100">
+                  Login
+                </button>
+              </div>
+            </form>
+            <p class="text-center mt-3 text-secondary">
+              Not registered yet?
+              <u><a href="#" class="register-link">Register</a></u>
+            </p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
- <!-- JavaScript code to handle form submission and remember me functionality -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-  // Retrieve the stored state of the "Remember me" checkbox and email from local storage
-  var rememberMe = localStorage.getItem('rememberMe');
-  var storedEmail = localStorage.getItem('email');
-  var rememberMeCheckbox = document.getElementById('rememberMe');
-  var emailInput = document.getElementById('email');
+    <!-- JavaScript code to handle form submission and remember me functionality -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Retrieve the stored state of the "Remember me" checkbox and email from local storage
+        var rememberMe = localStorage.getItem("rememberMe");
+        var storedEmail = localStorage.getItem("email");
+        var rememberMeCheckbox = document.getElementById("rememberMe");
+        var emailInput = document.getElementById("email");
 
-  // Check if the "Remember me" checkbox was previously checked
-  if (rememberMe === 'true') {
-    rememberMeCheckbox.checked = true;
-    emailInput.value = storedEmail; // Populate the email field with the stored email
-  }
-
-  function signIn() {
-    const emailAddress = emailInput.value;
-    const password = document.getElementById('password').value;
-
-    fetch("http://workable-push-production.up.railway.app/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        emailAddress: emailAddress,
-        password: password,
-      }),
-    })
-      .then((response) => {
-        if (response.ok) {
-          response.json().then((data) => {
-            console.log("Success");
-            console.log("Data:", data);
-
-            const token = data.data.token;
-
-            console.log("Token:", token);
-
-            localStorage.setItem("token", token);
-
-            window.location.href = '/menu.html';
-          });
-        } else {
-          console.log("Error");
-          console.log(response);
+        // Check if the "Remember me" checkbox was previously checked
+        if (rememberMe === "true") {
+          rememberMeCheckbox.checked = true;
+          emailInput.value = storedEmail; // Populate the email field with the stored email
         }
-      })
-      .catch((error) => {
-        console.log("Error");
-        console.log(error);
+
+        function signIn() {
+          const emailAddress = "thomas@gmail.com";
+          const password = "secret123";
+
+          fetch("http://127.0.0.1:3000/api/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              emailAdress: emailAddress,
+              password: password,
+            }),
+          })
+            .then((response) => {
+              if (response.ok) {
+                response.json().then((data) => {
+                  console.log("Success");
+                  console.log("Data:", data);
+
+                  const token = data.data.token;
+
+                  console.log("Token:", token);
+
+                  localStorage.setItem("token", token);
+                });
+              } else {
+                console.log("Error");
+                console.log(response);
+              }
+            })
+            .catch((error) => {
+              console.log("Error");
+              console.log(error);
+            });
+        }
+
+        // Add event listener to the form submission
+        document
+          .getElementById("loginForm")
+          .addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+            signIn();
+          });
       });
-  }
-
-  // Add event listener to the form submission
-  document.getElementById('loginForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent the form from submitting normally
-    signIn();
-  });
-});
-
-  </script>
-</body>
-
+    </script>
+  </body>
 </html>
