@@ -48,44 +48,64 @@
  <!-- JavaScript code to handle form submission and remember me functionality -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Retrieve the stored state of the "Remember me" checkbox and email from local storage
-      var rememberMe = localStorage.getItem('rememberMe');
-      var storedEmail = localStorage.getItem('email');
-      var rememberMeCheckbox = document.getElementById('rememberMe');
-      var emailInput = document.getElementById('email');
+  // Retrieve the stored state of the "Remember me" checkbox and email from local storage
+  var rememberMe = localStorage.getItem('rememberMe');
+  var storedEmail = localStorage.getItem('email');
+  var rememberMeCheckbox = document.getElementById('rememberMe');
+  var emailInput = document.getElementById('email');
 
-      // Check if the "Remember me" checkbox was previously checked
-      if (rememberMe === 'true') {
-        rememberMeCheckbox.checked = true;
-        emailInput.value = storedEmail; // Populate the email field with the stored email
-      }
+  // Check if the "Remember me" checkbox was previously checked
+  if (rememberMe === 'true') {
+    rememberMeCheckbox.checked = true;
+    emailInput.value = storedEmail; // Populate the email field with the stored email
+  }
 
-      // Add event listener to the form submission
-      document.getElementById('loginForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent form submission
+  function signIn() {
+    const emailAddress = emailInput.value;
+    const password = document.getElementById('password').value;
 
-        // Get the entered username and password
-        var username = emailInput.value;
-        var password = document.getElementById('password').value;
+    fetch("http://workable-push-production.up.railway.app/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        emailAddress: emailAddress,
+        password: password,
+      }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          response.json().then((data) => {
+            console.log("Success");
+            console.log("Data:", data);
 
-        // Check if the username and password match the desired values
-        if (username === 'info@skoolworkshop.nl' && password === 'clintenpique') {
-          // Store the state of the "Remember me" checkbox and email in local storage
-          localStorage.setItem('rememberMe', rememberMeCheckbox.checked);
-          if (rememberMeCheckbox.checked) {
-            localStorage.setItem('email', username);
-          } else {
-            localStorage.removeItem('email');
-          }
+            const token = data.data.token;
 
-          // Redirect to menu.html
-          window.location.href = '/Webpage/menu.html';
+            console.log("Token:", token);
+
+            localStorage.setItem("token", token);
+
+            window.location.href = '/menu.html';
+          });
         } else {
-          // Invalid credentials, display an error message
-          alert('Invalid credentials');
+          console.log("Error");
+          console.log(response);
         }
+      })
+      .catch((error) => {
+        console.log("Error");
+        console.log(error);
       });
-    });
+  }
+
+  // Add event listener to the form submission
+  document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the form from submitting normally
+    signIn();
+  });
+});
+
   </script>
 </body>
 
