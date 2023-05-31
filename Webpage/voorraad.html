@@ -8,40 +8,11 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="/css/voorraad.css">
-
-  <style>
-    .back-button {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      width: 50px;
-      height: 50px;
-      background-color: #ffffff;
-      border-radius: 50%;
-      border-radius: 10px;
-      background-color: #ffffff;
-      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  
-    .back-icon {
-      width: 32px;
-      margin: auto;
-      margin-right: 5px;
-    }
-  
-    .back-button:hover {
-      transform: scale(1.05);
-      transition: transform 0.3s ease;
-    }
-  </style>
+  <link rel="stylesheet" href="/css/custom.css">
 </head>
 
 <body>
   <div class="container">
-
     <button class="back-button" onclick="window.location.href = '/menu.html';">
       <img src="/img/arrow-left.png" alt="Back" class="back-icon">
     </button>
@@ -52,6 +23,16 @@
       <input type="text" class="search-bar" placeholder="Search for products">
     </div>
 
+    <!-- Scan barcode button -->
+    <button id="scanButton" >Scan Barcode</button>
+    
+    <!-- Scanner popup -->
+    <div id="scanner-popup" style="display: none;">
+      <div id="scanner-container">
+        <video id="video" width="500" height="500" style="border: 1px solid gray"></video>
+        <button id="exit-button">Exit</button>
+      </div>
+    </div>
     <div class="row">
       <div class="col-12">
         <div class="menu-container" id="menuContainer">
@@ -101,7 +82,6 @@
       </div>
     </div>
   </div>
-
   <div class="popup" id="popup">
     <div class="popup-content">
       <h4 class="popup-title" id="popupTitle"></h4>
@@ -120,8 +100,11 @@
       <button class="popup-close-button">Close</button>
     </div>
   </div>
-
-  <script src="/js/voorraad.js"></script>
+  <!-- ZXing library import -->
+  <script src="https://unpkg.com/@zxing/library@latest"></script>
+  <script src="/js/search.js"></script>
+  <script src="/js/item-popup.js"></script>
+  <script src="/js/scanner.js"></script>
 </body>
 
 </html>
