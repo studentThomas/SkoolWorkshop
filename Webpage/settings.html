@@ -104,6 +104,11 @@
           option.value = device.deviceId;
           option.text = device.label || `Camera ${index + 1}`;
           cameraSelect.appendChild(option);
+
+          // Check if the device ID matches the stored camera ID
+          if (device.deviceId === selectedDeviceId) {
+            option.selected = true;
+          }
         });
       }
 
@@ -113,6 +118,9 @@
         localStorage.setItem('selectedCameraId', selectedCameraId);
         alert('Settings saved successfully!');
       }
+
+      // Get the stored camera ID from local storage
+      selectedDeviceId = localStorage.getItem('selectedCameraId');
 
       // Get the available video input devices
       codeReader.listVideoInputDevices()
