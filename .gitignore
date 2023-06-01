@@ -2,3 +2,5 @@
 node_modules/
 .vscode/
 *.zip
+package-lock.json
+
