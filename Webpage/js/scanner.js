@@ -5,7 +5,7 @@ window.addEventListener('load', function () {
 
   // Function to open the scanner popup
   function openScannerPopup() {
-    document.getElementById('scanner-popup').style.display = 'block';
+    document.getElementById('scanner-popup').style.display = 'flex';
   }
 
   // Function to close the scanner popup
