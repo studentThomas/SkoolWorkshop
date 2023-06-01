@@ -7,15 +7,16 @@
   <title>Voorraad</title>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/css/voorraad.css">
-  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="css/voorraad.css">
+  <link rel="stylesheet" href="css/custom.css">
 </head>
 
 <body>
   <div class="container">
-    <button class="back-button" onclick="window.location.href = '/menu.html';">
-      <img src="/img/arrow-left.png" alt="Back" class="back-icon">
-    </button>
+
+    <a href="menu.html" class="back-button">
+      <img src="img/arrow-left.png" alt="Menu" class="img">
+    </a>
 
     <h2 class="welcome-message">Voorraad</h2>
 
@@ -39,7 +40,7 @@
           <!-- Inventory Items -->
           <div class="menu-item col-12 col-sm-6 col-md-4 col-lg-3">
             <div class="item-wrapper">
-              <img src="/img/inventory-item.png" alt="Afbeelding 1" class="img-fluid">
+              <img src="img/inventory-item.png" alt="Afbeelding 1" class="img-fluid">
               <div class="item-details">
                 <h4 class="title">Spuitverf Set</h4>
                 <p class="barcode">Barcode: 8712345678901</p>
@@ -49,7 +50,7 @@
           </div>
           <div class="menu-item col-12 col-sm-6 col-md-4 col-lg-3">
             <div class="item-wrapper">
-              <img src="/img/inventory-item.png" alt="Afbeelding 2" class="img-fluid">
+              <img src="img/inventory-item.png" alt="Afbeelding 2" class="img-fluid">
               <div class="item-details">
                 <h4 class="title">Vlogcamera</h4>
                 <p class="barcode">Barcode: 9809876543210</p>
@@ -59,7 +60,7 @@
           </div>
           <div class="menu-item col-12 col-sm-6 col-md-4 col-lg-3">
             <div class="item-wrapper">
-              <img src="/img/inventory-item.png" alt="Afbeelding 3" class="img-fluid">
+              <img src="img/inventory-item.png" alt="Afbeelding 3" class="img-fluid">
               <div class="item-details">
                 <h4 class="title">Kunst Schetsboek</h4>
                 <p class="barcode">Barcode: 7654321098765</p>
@@ -69,7 +70,7 @@
           </div>
           <div class="menu-item col-12 col-sm-6 col-md-4 col-lg-3">
             <div class="item-wrapper">
-              <img src="/img/inventory-item.png" alt="Afbeelding 4" class="img-fluid">
+              <img src="img/inventory-item.png" alt="Afbeelding 4" class="img-fluid">
               <div class="item-details">
                 <h4 class="title">Graffiti Stencils</h4>
                 <p class="barcode">Barcode: 5432109876543</p>
@@ -102,9 +103,9 @@
   </div>
   <!-- ZXing library import -->
   <script src="https://unpkg.com/@zxing/library@latest"></script>
-  <script src="/js/search.js"></script>
-  <script src="/js/item-popup.js"></script>
-  <script src="/js/scanner.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/item-popup.js"></script>
+  <script src="js/scanner.js"></script>
 </body>
 
 </html>
