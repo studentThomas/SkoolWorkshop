@@ -29,16 +29,29 @@ body {
   margin-top: 20px;
 }
 
-.search-bar {
-  width: 100%;
-  max-width: 100%;
+.search-bar,
+#scanButton {
+  width: 95%;
   height: 30px;
-  border: none;
+  max-width: 100%;
+  margin: 5px auto;
   border-radius: 15px;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
-  padding: 10px;
+  display: flex;
+  align-items: center; /* Vertically center the content */
+  justify-content: center; /* Horizontally center the content */
+  font-weight: bold;
+  padding: 12px; /* Increase the vertical padding */
   font-size: 14px;
   transition: box-shadow 0.3s ease;
+}
+
+#scanButton:hover {
+  transform: scale(1.05);
+}
+
+.camera-select {
+  display: none;
 }
 
 .menu-container {
@@ -177,6 +190,35 @@ body {
   margin-top: 20px;
   cursor: pointer;
 }
+
+.scanner-container {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.scanner-container.show {
+  display: flex;
+}
+
+.scanner-container #video {
+  width: 100%;
+  height: auto;
+  border: none;
+  outline: none;
+}
+
+.scanner-container #exit-button {
+  background-color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
 
 .back-button {
   position: absolute;
