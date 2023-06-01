@@ -80,65 +80,61 @@
     </div>
 
     <!-- JavaScript code to handle form submission and remember me functionality -->
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // Retrieve the stored state of the "Remember me" checkbox and email from local storage
-        var rememberMe = localStorage.getItem("rememberMe");
-        var storedEmail = localStorage.getItem("email");
-        var rememberMeCheckbox = document.getElementById("rememberMe");
-        var emailInput = document.getElementById("email");
-
-        // Check if the "Remember me" checkbox was previously checked
-        if (rememberMe === "true") {
-          rememberMeCheckbox.checked = true;
-          emailInput.value = storedEmail; // Populate the email field with the stored email
-        }
-
-        function signIn() {
-          const emailAddress = "thomas@gmail.com";
-          const password = "secret123";
-
-          fetch("http://127.0.0.1:3000/api/login", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              emailAdress: emailAddress,
-              password: password,
-            }),
-          })
-            .then((response) => {
-              if (response.ok) {
-                response.json().then((data) => {
-                  console.log("Success");
-                  console.log("Data:", data);
-
-                  const token = data.data.token;
-
-                  console.log("Token:", token);
-
-                  localStorage.setItem("token", token);
-                });
-              } else {
-                console.log("Error");
-                console.log(response);
-              }
-            })
-            .catch((error) => {
-              console.log("Error");
-              console.log(error);
+    <script>  
+      function login() {
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        
+        fetch("http://127.0.0.1:3000/api/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            emailAdress: email,
+            password: password,
+          }),
+        })
+        .then((response) => {
+          if (response.ok) {
+            response.json().then((data) => {
+              console.log("Success");
+              console.log("Data:", data);
+  
+              const token = data.data.token;
+  
+              console.log("Token:", token);
+  
+              localStorage.setItem("token", token);
             });
+          } else {
+            console.log("Error");
+            console.log(response);
+          }
+        })
+        .catch((error) => {
+          console.log("Error");
+          console.log(error);
+        });
+      }
+  
+      // Add event listener to the form submission
+      document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault(); 
+        const rememberMeCheckbox = document.getElementById('rememberMe');
+        const emailInput = document.getElementById('email');
+        
+        if (rememberMeCheckbox.checked) {
+          localStorage.setItem('rememberMe', true);
+          localStorage.setItem('email', emailInput.value);
+        } else {
+          localStorage.removeItem('rememberMe');
+          localStorage.removeItem('email');
         }
-
-        // Add event listener to the form submission
-        document
-          .getElementById("loginForm")
-          .addEventListener("submit", function (event) {
-            event.preventDefault(); // Prevent the form from submitting normally
-            signIn();
-          });
+        
+        login(); 
       });
-    </script>
+  </script>
+  
   </body>
 </html>
