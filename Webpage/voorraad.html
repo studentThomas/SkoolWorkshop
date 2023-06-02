@@ -8,7 +8,6 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/voorraad.css">
-
 </head>
 
 <body>
@@ -29,6 +28,17 @@
     </div>
 
     <div class="row">
+    <!-- Scan barcode button -->
+    <button id="scanButton" >Scan Barcode</button>
+    
+    <!-- Scanner popup -->
+    <div id="scanner-popup" style="display: none;">
+      <div id="scanner-container">
+        <video id="video" width="500" height="500" style="border: 1px solid gray"></video>
+        <button id="exit-button">Exit</button>
+      </div>
+    </div>
+
       <div class="col-12">
         <div class="menu-container" id="menuContainer">
           <!-- Inventory Items -->
@@ -57,8 +67,12 @@
       <button class="popup-close-button">Close</button>
     </div>
   </div>
-
   <script src="js/voorraad.js"></script>
+  <!-- ZXing library import -->
+  <script src="https://unpkg.com/@zxing/library@latest"></script>
+  <script src="js/search.js"></script>
+  <script src="js/item-popup.js"></script>
+  <script src="js/scanner.js"></script>
 </body>
 
 </html>

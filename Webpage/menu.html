@@ -7,31 +7,37 @@
   <title>Main Menu</title>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/css/menu.css">
+  <link rel="stylesheet" href="css/menu.css">
 </head>
 
 <body>
-  <div class="container">
+  <div class="container"> 
+
     <h2 class="welcome-message">Welcome</h2>
+
+    <button class="help-button" onclick="window.location.href = 'help.html';">
+      <img src="img/question-mark.png" alt="Help" class="help-icon">
+    </button>
+
     <div class="menu-container">
-      <a href="/wip.html" class="menu-item">
-        <img src="/img/calendar.png" alt="Image 1">
+      <a href="workshopBoekingen.html" class="menu-item">
+        <img src="img/calendar.png" alt="Image 1">
         <span class="label">Workshop boekingen</span>
       </a>
-      <a href="/voorraad.html" class="menu-item">
-        <img src="/img/warehouse.png" alt="Image 2">
+      <a href="voorraad.html" class="menu-item">
+        <img src="img/warehouse.png" alt="Image 2">
         <span class="label">Voorraad</span>
       </a>
-      <a href="/productManagement.html" class="menu-item">
-        <img src="/img/new-product.png" alt="Image 2">
+      <a href="productManagement.html" class="menu-item">
+        <img src="img/new-product.png" alt="Image 2">
         <span class="label">Product management</span>
       </a>
-      <a href="/wip.html" class="menu-item">
-        <img src="/img/bell.png" alt="Image 2">
+      <a href="notificaties.html" class="menu-item">
+        <img src="img/bell.png" alt="Image 2">
         <span class="label">Notificaties</span>
       </a>
-      <a href="/settings.html" class="menu-item">
-        <img src="/img/gear.png" alt="Image 2">
+      <a href="settings.html" class="menu-item">
+        <img src="img/gear.png" alt="Image 2">
         <span class="label">Instellingen</span>
       </a>
       <!-- Add more menu items as needed -->
