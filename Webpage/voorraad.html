@@ -7,81 +7,38 @@
   <title>Voorraad</title>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/css/voorraad.css">
-  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="css/voorraad.css">
+
 </head>
 
 <body>
   <div class="container">
-    <button class="back-button" onclick="window.location.href = '/menu.html';">
-      <img src="/img/arrow-left.png" alt="Back" class="back-icon">
+
+    <button class="back-button" onclick="window.location.href = 'menu.html';">
+      <img src="img/arrow-left.png" alt="Back" class="back-icon">
     </button>
 
     <h2 class="welcome-message">Voorraad</h2>
+
+    <button class="scanner-button" onclick="window.location.href = 'scanner.html';">
+      <img src="img/barcode.png" alt="Scanner" class="scanner-icon">
+    </button>
 
     <div class="search-container">
       <input type="text" class="search-bar" placeholder="Search for products">
     </div>
 
-    <!-- Scan barcode button -->
-    <button id="scanButton" >Scan Barcode</button>
-    
-    <!-- Scanner popup -->
-    <div id="scanner-popup" style="display: none;">
-      <div id="scanner-container">
-        <video id="video" width="500" height="500" style="border: 1px solid gray"></video>
-        <button id="exit-button">Exit</button>
-      </div>      
-    </div>
     <div class="row">
       <div class="col-12">
         <div class="menu-container" id="menuContainer">
           <!-- Inventory Items -->
           <div class="menu-item col-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="item-wrapper">
-              <img src="/img/inventory-item.png" alt="Afbeelding 1" class="img-fluid">
-              <div class="item-details">
-                <h4 class="title">Spuitverf Set</h4>
-                <p class="barcode">Barcode: 8712345678901</p>
-                <p class="stock">8</p>
-              </div>
-            </div>
           </div>
-          <div class="menu-item col-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="item-wrapper">
-              <img src="/img/inventory-item.png" alt="Afbeelding 2" class="img-fluid">
-              <div class="item-details">
-                <h4 class="title">Vlogcamera</h4>
-                <p class="barcode">Barcode: 9809876543210</p>
-                <p class="stock">3</p>
-              </div>
-            </div>
-          </div>
-          <div class="menu-item col-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="item-wrapper">
-              <img src="/img/inventory-item.png" alt="Afbeelding 3" class="img-fluid">
-              <div class="item-details">
-                <h4 class="title">Kunst Schetsboek</h4>
-                <p class="barcode">Barcode: 7654321098765</p>
-                <p class="stock">12</p>
-              </div>
-            </div>
-          </div>
-          <div class="menu-item col-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="item-wrapper">
-              <img src="/img/inventory-item.png" alt="Afbeelding 4" class="img-fluid">
-              <div class="item-details">
-                <h4 class="title">Graffiti Stencils</h4>
-                <p class="barcode">Barcode: 5432109876543</p>
-                <p class="stock">6</p>
-              </div>
-            </div>
-          </div>
-          <!-- Add more inventory items as needed -->
         </div>
       </div>
     </div>
   </div>
+
   <div class="popup" id="popup">
     <div class="popup-content">
       <h4 class="popup-title" id="popupTitle"></h4>
@@ -96,16 +53,12 @@
         <button class="stock-button" id="increaseButton">
           <img src="img/plus.png" alt="Increase" class="button-icon">
         </button>
-      </div>
+      </div>  
       <button class="popup-close-button">Close</button>
     </div>
   </div>
-  <!-- ZXing library import -->
-  <script src="https://unpkg.com/@zxing/library@latest"></script>
-  <script src="/js/search.js"></script>
-  <script src="/js/scanner.js"></script>
-  <script src="/js/item-popup.js"></script>
 
+  <script src="js/voorraad.js"></script>
 </body>
 
 </html>

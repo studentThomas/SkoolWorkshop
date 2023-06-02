@@ -1,3 +1,44 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.querySelector('.search-bar');
+  const menuItemsContainer = document.getElementById('menuContainer');
+
+  fetch('https://skoolworkshop.up.railway.app/api/product')
+    .then((response) => response.json())
+    .then((data) => {
+      const products = data.data;
+
+      products.forEach((product) => {
+        const productCard = document.createElement("div");
+        productCard.className = "menu-item col-12 col-sm-6 col-md-4 col-lg-3";
+        productCard.innerHTML = `
+          <div class="item-wrapper">
+            <img src="img/${product.Image}" alt="Afbeelding" class="img-fluid">
+            <div class="item-details">
+              <h4 class="title">${product.Name}</h4>
+              <p class="barcode">Barcode: ${product.Code}</p>
+              <p class="stock">${product.Quantity}</p>
+            </div>
+          </div>
+        `;
+        menuItemsContainer.appendChild(productCard);
+      });
+
+      // Add event listener for search input
+      searchInput.addEventListener('keyup', searchInventoryItems);
+
+      // Add event listeners for menu items
+      const menuItems = document.querySelectorAll('.menu-item');
+      menuItems.forEach((menuItem) => {
+        menuItem.addEventListener('click', () => {
+          openPopup(menuItem);
+        });
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
 function searchInventoryItems() {
   const searchInput = document.querySelector('.search-bar').value.toLowerCase();
   const menuItems = document.querySelectorAll('.menu-item');
