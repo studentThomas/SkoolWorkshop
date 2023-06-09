@@ -1,7 +1,10 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/">voorraad</router-link> |
+    <router-link to="/bestellingen">Bestellingen</router-link>
+    <router-link to="/scanner">Scanner</router-link>
+    <router-link to="/notificaties">Notificaties</router-link>
+    <router-link to="/instelligen">instellingen</router-link>
   </nav>
   <router-view/>
 </template>
