@@ -4,6 +4,7 @@ import boekingenView from '../views/boekingenView.vue'
 import scannerView from '../views/scannerView.vue'
 import notificatiesView from '../views/notificatiesView.vue'
 import instellingenView from '../views/instellingenView.vue'
+import addproductView from '../views/addProductView.vue'
 
 const routes = [
   {
@@ -30,6 +31,11 @@ const routes = [
     path: '/instellingen',
     name: 'instellingen',
     component: instellingenView,
+  },
+  {
+    path: '/addproduct',
+    name: 'addproduct',
+    component: addproductView,
   },
 ]
 
