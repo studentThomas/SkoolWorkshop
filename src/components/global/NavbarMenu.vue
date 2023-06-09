@@ -22,6 +22,10 @@
         <img src="../../assets/icons/instellingen.png" alt="Instellingen" class="icon" />
         <span class="text">Instellingen</span>
       </router-link>
+      <router-link to="/addproduct" class="col-2 col-lg-1 nav-item">
+        <img src="../../assets/icons/instellingen.png" alt="addProduct" class="icon" />
+        <span class="text">product toevoegen</span>
+      </router-link>
     </div>
     <div class="d-flex justify-content-center align-items-center circle-container">
       <div class="circle"></div>
