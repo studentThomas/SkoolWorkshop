@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import VoorraadView from '../views/voorraadView.vue'
-import bestellingenView from '../views/bestellingenView.vue'
+import boekingenView from '../views/boekingenView.vue'
 import scannerView from '../views/scannerView.vue'
 import notificatiesView from '../views/notificatiesView.vue'
 import instellingenView from '../views/instellingenView.vue'
@@ -12,9 +12,9 @@ const routes = [
     component: VoorraadView
   },
   {
-    path: '/bestellingen',
-    name: 'bestellingen',
-    component: bestellingenView,
+    path: '/boekingen',
+    name: 'boekingen',
+    component: boekingenView,
   },
   {
     path: '/scanner',
